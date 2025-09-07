@@ -18,10 +18,19 @@
         "name": "next"
       }
     ],
+    "baseUrl": "src",
     "paths": {
-      "@/*": ["./src/*"]
+      "@lib/*": ["app/lib/*"],
+      "@models/*": ["models/*"],
+      "@api/*": ["app/api/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/lib/test-db.js"
+  ],
   "exclude": ["node_modules"]
 }
