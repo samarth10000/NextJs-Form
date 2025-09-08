@@ -1,16 +1,18 @@
-// utils/cloudinary.js
 import { v2 as cloudinary } from "cloudinary";
+
 interface CloudinaryUploadResult {
   public_id: string;
+  secure_url: string;
   [key: string]: any;
 }
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadImage = async (file) => {
+export const uploadImage = async (file: File): Promise<string> => {
   try {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
@@ -27,9 +29,8 @@ export const uploadImage = async (file) => {
         uploadStream.end(buffer);
       }
     );
-    return result.public_id;
-    // const result = await cloudinary.uploader.upload(file);
-    // return result.secure_url; // Return the URL of the uploaded image
+
+    return result.secure_url; // ✅ Cloudinary file URL
   } catch (error) {
     console.error("Cloudinary upload error:", error);
     throw new Error("Upload failed");

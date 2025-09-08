@@ -17,8 +17,9 @@ export default function Registration() {
     if (file) formData.append("resume", file);
 
     try {
-      const res = await fetch("/api/register", {
+      const res = await fetch("http://localhost:3020/api/auth/register", {
         method: "POST",
+        credentials: "include",
         body: formData,
       });
 
@@ -47,7 +48,6 @@ export default function Registration() {
           Register
         </h2>
 
-        {/* Email */}
         <input
           type="email"
           placeholder="Enter your email"
@@ -59,7 +59,6 @@ export default function Registration() {
              placeholder-gray-400 text-gray-900 text-base"
         />
 
-        {/* Password */}
         <input
           type="password"
           placeholder="Password"
@@ -71,7 +70,6 @@ export default function Registration() {
              placeholder-gray-400 text-gray-900 text-base"
         />
 
-        {/* Resume Upload */}
         <label className="flex flex-col items-center p-3 border border-gray-800 rounded-lg w-full cursor-pointer hover:bg-gray-100 text-gray-600">
           {file ? file.name : "Upload your resume"}
           <input
@@ -82,7 +80,6 @@ export default function Registration() {
           />
         </label>
 
-        {/* Submit */}
         <button
           type="submit"
           className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white p-3 rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all"
@@ -90,7 +87,6 @@ export default function Registration() {
           Submit
         </button>
 
-        {/* Status */}
         {status && (
           <p
             className={`mt-2 text-sm text-center font-medium ${
